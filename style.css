@@ -1,0 +1,263 @@
+/* =========================================================
+       1. COLORES
+       Todos los colores viven aquí. Cambia un valor y cambia
+       toda la página (incluyendo los dibujos).
+       ========================================================= */
+    :root {
+      --fondo: #f4f7fb;
+      --banda: #e8eff9;          /* fondo de las secciones alternas */
+      --tarjeta: #ffffff;
+      --linea: #d5deec;
+      --texto: #16213a;
+      --texto-suave: #4a5670;
+      --acento: #0a6cc4;         /* azul principal */
+      --agua: #bfe0fa;           /* azul claro (líquidos) */
+      --agua-fuerte: #3d9be9;    /* azul medio */
+      --luz: #f5a524;            /* amarillo (luz, LED) */
+      --hero: #0b3b73;           /* azul oscuro de la portada */
+
+      /* Espacio para las barras del teléfono */
+      box-sizing: border-box;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    html { scroll-padding-top: env(safe-area-inset-top, 0px); scroll-behavior: smooth; }
+
+    /* Modo oscuro: se activa solo si el teléfono está en modo oscuro */
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --fondo: #0f1626;
+        --banda: #141d33;
+        --tarjeta: #18213a;
+        --linea: #2a3654;
+        --texto: #e8edf7;
+        --texto-suave: #a5b1c9;
+        --acento: #5eb0ff;
+        --agua: #1f4a78;
+        --agua-fuerte: #5eb0ff;
+        --luz: #ffc04d;
+        --hero: #0b2a52;
+      }
+    }
+    :root[data-theme="dark"] {
+      --fondo: #0f1626;
+      --banda: #141d33;
+      --tarjeta: #18213a;
+      --linea: #2a3654;
+      --texto: #e8edf7;
+      --texto-suave: #a5b1c9;
+      --acento: #5eb0ff;
+      --agua: #1f4a78;
+      --agua-fuerte: #5eb0ff;
+      --luz: #ffc04d;
+      --hero: #0b2a52;
+    }
+
+    /* =========================================================
+       2. BASE
+       ========================================================= */
+    body {
+      margin: 0;
+      background: var(--fondo);
+      color: var(--texto);
+      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-size: 18px;
+      line-height: 1.65;
+    }
+
+    .contenedor { max-width: 44rem; margin: 0 auto; padding: 0 1.25rem; }
+
+    h1 { font-size: clamp(2.8rem, 11vw, 4.8rem); line-height: 1; font-weight: 800; margin: 0 0 1rem; }
+    h2 { font-size: clamp(1.9rem, 6vw, 2.5rem); line-height: 1.15; margin: 0 0 1rem; }
+    h3 { font-size: 1.25rem; margin: 2rem 0 0.5rem; color: var(--acento); }
+    p  { margin: 0 0 1rem; }
+    a  { color: var(--acento); }
+
+    section { padding: 3.5rem 0; }
+    .banda  { background: var(--banda); }
+
+    /* =========================================================
+       3. PORTADA
+       ========================================================= */
+    .hero { background: var(--hero); color: #ffffff; padding: 3.5rem 0 3rem; }
+    .hero p { color: #cfe3fa; font-size: 1.25rem; }
+
+    .experimentos { display: grid; gap: 0.75rem; margin-top: 2rem; }
+
+    .ir {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      border: 2px solid rgba(255, 255, 255, 0.35);
+      border-radius: 16px;
+      color: #ffffff;
+      text-decoration: none;
+    }
+    .ir:hover, .ir:focus-visible { border-color: #ffffff; background: rgba(255, 255, 255, 0.1); }
+    .ir strong { display: block; font-size: 1.2rem; line-height: 1.25; }
+    .ir span   { color: #cfe3fa; font-size: 0.95rem; }
+
+    /* Iconos pequeños de la portada (dibujados con líneas blancas) */
+    .icono {
+      width: 56px; height: 56px; flex-shrink: 0;
+      fill: none; stroke: #ffffff; stroke-width: 3.5;
+      stroke-linecap: round; stroke-linejoin: round;
+    }
+
+    /* En pantallas grandes, las 3 tarjetas van en fila */
+    @media (min-width: 40rem) {
+      .experimentos { grid-template-columns: repeat(3, 1fr); }
+      .ir { flex-direction: column; align-items: flex-start; }
+    }
+
+    /* =========================================================
+       4. FICHA DEL EQUIPO
+       ========================================================= */
+    .ficha {
+      background: var(--tarjeta);
+      border: 1px solid var(--linea);
+      border-radius: 16px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .ficha p { margin: 0.25rem 0; }
+    .ficha strong { color: var(--acento); }
+
+    .equipo { list-style: none; padding: 0; margin: 0; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr)); }
+    .equipo li { text-align: center; font-size: 0.95rem; line-height: 1.3; margin: 0; }
+    .avatar {
+      display: grid; place-items: center;
+      width: 4rem; height: 4rem; margin: 0 auto 0.5rem;
+      border-radius: 50%;
+      background: var(--acento); color: var(--fondo);
+      font-size: 1.3rem; font-weight: 800;
+    }
+
+    /* =========================================================
+       5. PIEZAS REUTILIZABLES
+       ========================================================= */
+
+    /* Frase grande */
+    .frase { font-size: clamp(1.5rem, 5vw, 2rem); line-height: 1.25; font-weight: 800; margin: 1.5rem 0; }
+
+    /* Cuadro destacado */
+    .destacado {
+      background: var(--tarjeta);
+      border-left: 6px solid var(--acento);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      margin: 1rem 0;
+    }
+    .destacado p { margin: 0; }
+
+    /* Lista con palomitas */
+    .checks { list-style: none; padding: 0; }
+    .checks li { position: relative; padding-left: 2rem; margin-bottom: 0.8rem; }
+    .checks li::before { content: "✓"; position: absolute; left: 0; color: var(--acento); font-weight: 800; }
+
+    /* Pasos numerados */
+    .pasos { list-style: none; padding: 0; counter-reset: paso; }
+    .pasos li { counter-increment: paso; position: relative; padding-left: 3rem; margin-bottom: 1rem; }
+    .pasos li::before {
+      content: counter(paso);
+      position: absolute; left: 0; top: 0;
+      width: 2.1rem; height: 2.1rem;
+      display: grid; place-items: center;
+      border-radius: 50%;
+      background: var(--acento); color: var(--fondo);
+      font-weight: 800;
+    }
+
+    /* Tarjetas en cuadrícula */
+    .tarjetas { display: grid; gap: 0.75rem; grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr)); margin: 1rem 0; }
+    .tarjeta { background: var(--tarjeta); border: 1px solid var(--linea); border-radius: 12px; padding: 1rem; }
+    .tarjeta h4 { margin: 0 0 0.25rem; font-size: 1.05rem; }
+    .tarjeta p  { margin: 0; font-size: 0.95rem; line-height: 1.45; color: var(--texto-suave); }
+    .letra { display: block; font-size: 2.6rem; font-weight: 800; line-height: 1; color: var(--acento); margin-bottom: 0.4rem; }
+
+    /* Etiquetas pequeñas (materia) */
+    .chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0 0 1.5rem; padding: 0; list-style: none; }
+    .chips li { margin: 0; padding: 0.2rem 0.8rem; border: 1px solid var(--acento); border-radius: 999px; color: var(--acento); font-size: 0.9rem; }
+
+    /* Botón de video */
+    .boton {
+      display: inline-block;
+      padding: 0.8rem 1.5rem;
+      background: var(--acento); color: var(--fondo);
+      border-radius: 10px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .boton:hover, .boton:focus-visible { opacity: 0.85; }
+
+    /* =========================================================
+       6. DIBUJOS (SVG)
+       Cada dibujo usa estas clases de color. Así los dibujos
+       cambian solos entre modo claro y oscuro.
+       ========================================================= */
+    .dibujo {
+      display: block; width: 100%; height: auto;
+      background: var(--tarjeta);
+      border: 1px solid var(--linea);
+      border-radius: 16px;
+      margin: 1.5rem 0 0.5rem;
+    }
+    .pie-dibujo { font-size: 0.9rem; color: var(--texto-suave); margin-bottom: 1.5rem; }
+
+    /* Rellenos */
+    .agua        { fill: var(--agua); }
+    .fuerte      { fill: var(--agua-fuerte); }
+    .acento      { fill: var(--acento); }
+    .luz         { fill: var(--luz); }
+    .tinta       { fill: var(--texto); }
+    .suave       { fill: var(--texto-suave); }
+    .caja        { fill: var(--tarjeta); }
+    .sobre-tinta { fill: var(--fondo); }
+
+    /* Contornos de figuras cerradas */
+    .borde { stroke: var(--acento); }
+
+    /* Líneas (cables, mangueras, brazos) */
+    .trazo { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .c-acento { stroke: var(--acento); }
+    .c-fuerte { stroke: var(--agua-fuerte); }
+    .c-luz    { stroke: var(--luz); }
+    .c-tinta  { stroke: var(--texto); }
+    .c-suave  { stroke: var(--texto-suave); }
+
+    /* Texto dentro de los dibujos */
+    .etiqueta { font-family: inherit; font-size: 22px; font-weight: 600; fill: var(--texto); }
+    .etiqueta.sobre-tinta { fill: var(--fondo); }
+    .signo    { font-family: inherit; font-size: 20px; font-weight: 800; fill: #0f1626; text-anchor: middle; }
+
+    /* Gotas de lluvia: la ÚNICA animación de la página */
+    .gota { animation: caer 1.6s linear infinite; fill: var(--agua-fuerte); }
+    @keyframes caer {
+      0%   { transform: translateY(0);     opacity: 0; }
+      15%  { opacity: 1; }
+      85%  { opacity: 1; }
+      100% { transform: translateY(105px); opacity: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) { .gota { animation: none; opacity: 1; } }
+    .equipo img.avatar-img {
+  width: 80px;      /* Ajusta el ancho según prefieras */
+  height: 80px;     /* Ajusta la altura según prefieras */
+  object-fit: cover;/* Evita que la foto se deforme */
+  border-radius: 50%;/* Mantiene la forma circular */
+  display: block;
+  margin: 0 auto 10px auto; /* Centra la imagen y la separa del nombre */
+}
+
+    /* =========================================================
+       7. FOTOS REALES (opcional)
+       Las fotos van dentro de la página como texto (base64), por eso
+       las líneas <img> son tan largas. Para cambiar una, reemplaza
+       todo el valor de src por el nombre de tu archivo, por ejemplo
+       src="foto-brazo.jpg", y deja la foto junto a este archivo.
+       ========================================================= */
+    .foto { display: block; width: 100%; max-width: 32rem; height: auto; border-radius: 16px; margin: 1.5rem 0 0.5rem; }
+
+    /* Bibliografía y pie */
+    .biblio { font-size: 0.95rem; color: var(--texto-suave); word-break: break-word; }
+    footer { padding: 2rem 0 3rem; color: var(--texto-suave); font-size: 0.9rem; }
